@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import languages from "../assets/languages.js";
 
 function Main() {
-  const [count, setCount] = useState(0);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  console.log(selectedLanguage);
+  function switchColor() {
+    const [isClicked, setIsClicked] = useState(false);
+  }
+  function switchCard(language) {
+    setSelectedLanguage(language);
+    setIsClicked(!isClicked);
+  }
 
   return (
     <>
@@ -13,9 +21,30 @@ function Main() {
               className="col d-flex justify-content-center mt-5"
               key={language.id}
             >
-              <button className="btn btn-primary">{language.title}</button>
+              <button
+                onClick={() => switchCard(language)}
+                className="btn btn-primary"
+              >
+                {language.title}
+              </button>
             </div>
           ))}
+        </div>
+        <div className="row">
+          <div className="card mt-5">
+            <div className="card-body">
+              {selectedLanguage ? (
+                <>
+                  <h2>{selectedLanguage.title}</h2>
+                  <p>{selectedLanguage.description}</p>
+                </>
+              ) : (
+                <>
+                  <h2>Nessun linguaggio selezionato</h2>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
