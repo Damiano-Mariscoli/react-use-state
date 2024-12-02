@@ -4,12 +4,9 @@ import languages from "../assets/languages.js";
 function Main() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   console.log(selectedLanguage);
-  function switchColor() {
-    const [isClicked, setIsClicked] = useState(false);
-  }
+
   function switchCard(language) {
     setSelectedLanguage(language);
-    setIsClicked(!isClicked);
   }
 
   return (
@@ -22,8 +19,14 @@ function Main() {
               key={language.id}
             >
               <button
-                onClick={() => switchCard(language)}
-                className="btn btn-primary"
+                onClick={() => {
+                  switchCard(language);
+                }}
+                className={`btn ${
+                  selectedLanguage && selectedLanguage.id === language.id
+                    ? "btn-success"
+                    : "btn-primary"
+                }`}
               >
                 {language.title}
               </button>
